@@ -23,12 +23,15 @@ links.sort();
 // Remove duplicates and invalid URLs.
 var kBadPrefix = 'javascript';
 for (var i = 0; i < links.length;) {
-  if (((i > 0) && (links[i] == links[i - 1])) ||
+  if (((i > 0) && (links[i].trim() == links[i - 1].trim())) ||
       (links[i] == '') ||
       (kBadPrefix == links[i].toLowerCase().substr(0, kBadPrefix.length)) ||
-      links[i].indexOf('.fit') == -1) {
-    links.splice(i, 1);
+      links[i].indexOf('.fit') == -1) 
+    {
+        console.log('skip link ' + i + ' ' + links[i]);
+        links.splice(i, 1);
   } else {
+    console.log('keep link ' + i + ' ' + links[i]);
     ++i;
   }
 }

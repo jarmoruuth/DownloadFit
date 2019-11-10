@@ -99,9 +99,30 @@ function filterLinks() {
 chrome.extension.onRequest.addListener(function(links) {
   console.log('addListener');
   for (var index in links) {
-    allLinks.push(links[index]);
+    // Check if .fit link is part or url parameter
+    console.log('addListener: link ' + links[index]);
+    var parts = links[index].split("?");
+    for (var i = 0; i < parts.length; i++) {
+      if (parts[i].indexOf('.fit') != -1) {
+        console.log('addListener: keep link part ' + parts[i]);
+        if (parts[i].indexOf('url=') != -1) {
+          parts[i] = parts[i].substr(4);
+        }
+        allLinks.push(parts[i]);
+      } else {
+        console.log('addListener: skip link part ' + parts[i]);
+      }
+    }
   }
   allLinks.sort();
+  // remove duplicates
+  for (var i = 1; i < allLinks.length;) {
+    if (allLinks[i-1] == allLinks[i]) {
+      links.splice(i, 1);
+    } else {
+      i++;
+    }
+  }
   visibleLinks = allLinks;
   showLinks();
 });
