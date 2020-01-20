@@ -1,7 +1,7 @@
 {
   "name": "Download .fit files from links",
-  "description": "Select links on a page and download .fit files",
-  "version": "0.1",
+  "description": "Download .fit files",
+  "version": "0.2",
   "minimum_chrome_version": "16.0.884",
   "permissions": ["downloads", "<all_urls>"],
   "browser_action": {"default_popup": "popup.html"},
